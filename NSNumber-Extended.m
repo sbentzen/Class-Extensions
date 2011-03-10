@@ -7,7 +7,7 @@
 }
 
 + (long) randomNumberBetween:(NSInteger)firstNumber andThisNumber:(NSInteger)lastNumber{
-    long rand = arc4random();
+    long int rand = arc4random();
     if (rand < 0) {
         rand = rand * -1;
     }
