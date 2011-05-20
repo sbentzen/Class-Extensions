@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSString (NSDate_Extended)
+@interface NSDate (NSDate_Extended)
 
 
 +(NSString *) whatSeasonIsThisDateIn:(NSDate *)date;

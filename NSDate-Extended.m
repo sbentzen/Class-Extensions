@@ -16,7 +16,7 @@ const int september = 9;
 const int december = 12;
 
 
-@implementation NSString (NSDate_Extended)
+@implementation NSDate (NSDate_Extended)
 
 
 +(NSString *) whatSeasonIsThisDateIn:(NSDate *)date{
