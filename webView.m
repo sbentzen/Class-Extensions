@@ -31,14 +31,9 @@
     //setting the view. this is called in the init methods and at the very end it calls viewdidload, because by the time you get to the end, it has loaded
     //NSLog(@"Loading the view");
     [[self theWebView] setDelegate:self];
-    [toolbar setTintColor:defaultColor];
     [[self navigationItem]setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]autorelease]];
     [back setEnabled:NO];
     [forward setEnabled:NO];
-    progress = [[MBProgressHUD alloc] initWithView:[self view]];
-    [progress setMode:MBProgressHUDModeIndeterminate];
-    [progress setTag:1];
-    [theWebView setDataDetectorTypes:UIDataDetectorTypeAll];
     [self viewDidLoad];
 
 }
@@ -52,6 +47,11 @@
     [theWebView stopLoading];
 }
 - (void) viewDidLoad{
+    [[self toolbar] setTintColor:defaultColor];
+    progress = [[MBProgressHUD alloc] initWithView:[self view]];
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    [progress setTag:1];
+    [theWebView setDataDetectorTypes:UIDataDetectorTypeAll];
     if (htmlToLoad != NULL) {
         //NSLog(@"loading the HTML document");
         [theWebView loadHTMLString:htmlToLoad baseURL:nil];
