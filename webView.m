@@ -47,6 +47,7 @@
     [theWebView stopLoading];
 }
 - (void) viewDidLoad{
+    [self setHidesBottomBarWhenPushed:YES];
     [[self toolbar] setTintColor:defaultColor];
     progress = [[MBProgressHUD alloc] initWithView:[self view]];
     [progress setMode:MBProgressHUDModeIndeterminate];
