@@ -33,7 +33,6 @@
 
 - (webView *) initWithWebsite:(NSURL *)theWebsite andTitle:(NSString *) titleToUse;
 - (webView *) initWithHTMLString:(NSString *)htmlFile;
-- (void) checkRotation;
 
 
 @end

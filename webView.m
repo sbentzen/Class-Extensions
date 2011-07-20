@@ -111,7 +111,6 @@
     }
     [[self theWebView] setScalesPageToFit:YES];
     [self loadView];
-    [self checkRotation];
     return self;
 }
 
@@ -130,7 +129,6 @@
     [theWebView setScalesPageToFit:NO];
     htmlToLoad = [htmlFile copy];
     [self loadView];
-    [self checkRotation];
     return self;
 }
 
@@ -156,13 +154,11 @@
     //NSLog(@"hiding the spinning thing");
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    //webview encountered an error and is alerting you to it.
-    [theWebView stopLoading];
-    [progress hide:YES];
-//    NSLog(@"%@",[error userInfo]);
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alert show];
-//    [alert release];
+    if (error.code != NSURLErrorCancelled){
+        [theWebView stopLoading];
+        [progress hide:YES];
+        NSLog(@"%@",[error localizedDescription]);
+    }
 }
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
     //deleting cached response
@@ -170,14 +166,10 @@
     newCache = nil;
     return newCache;
 }
+
 #pragma mark -
 #pragma mark AutoRotate Code
 
-- (void) checkRotation{
-    //setting the width of the fixed space between the buttons to ensure that they move to the proper boundries
-    //NSLog(@"%f",kScreenWidth * 0.17);
-
-}
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
