@@ -170,8 +170,6 @@
 #pragma mark -
 #pragma mark AutoRotate Code
 
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-}
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     if (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown) {
