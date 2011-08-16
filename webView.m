@@ -112,15 +112,9 @@
 - (webView*) initWithHTMLString:(NSString *)htmlFile{
     //initializes with HTML data
     self = [super init];
+    
+    [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"webView%@",isiPad?@"-iPad":@""] owner:self options:nil];
     //NSLog(@"custom initializer for an HTML file.");
-    if isiPad {
-        [[NSBundle mainBundle] loadNibNamed:@"webView-iPad" owner:self options:nil];
-        //NSLog(@"ipad nib");
-    }
-    else {
-        [[NSBundle mainBundle] loadNibNamed:@"webView" owner:self options:nil];
-        //NSLog(@"iphone nib");
-    }
     [theWebView setScalesPageToFit:NO];
     htmlToLoad = [htmlFile copy];
     [self loadView];
