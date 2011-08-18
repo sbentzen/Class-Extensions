@@ -98,7 +98,7 @@
     //this is an initialization method that loads the nib (depending on if it's an iPad or not)
     self = [super init];
     //NSLog(@"an initializer for a custom webView that takes a URL and a title for the page.");
-    [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"webView%@",isiPad?@"-iPad":@""] owner:self options:nil];
+    [[NSBundle mainBundle] loadNibNamed:@"webView" owner:self options:nil];
     
     if (self) {
         [self setTitle:titleToUse];
@@ -113,7 +113,7 @@
     //initializes with HTML data
     self = [super init];
     
-    [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"webView%@",isiPad?@"-iPad":@""] owner:self options:nil];
+    [[NSBundle mainBundle] loadNibNamed:@"webView" owner:self options:nil];
     //NSLog(@"custom initializer for an HTML file.");
     [theWebView setScalesPageToFit:NO];
     htmlToLoad = [htmlFile copy];
