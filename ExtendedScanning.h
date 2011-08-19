@@ -1,9 +1,9 @@
 //
 //  ExtendedScanning.h
-//  MySudbury
+//  Sambaworks
 //
 //  Created by Shaun on Wednesday, March 9 2011.
-//  Copyright 2011 Cambrian College. All rights reserved.
+//  Copyright 2011 Sambaworks. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

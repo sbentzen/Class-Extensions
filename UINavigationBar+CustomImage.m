@@ -1,11 +1,3 @@
-//
-//  UINavigationBar+CustomImage.m
-//  iCambrian
-//
-//  Created by Shaun Bentzen on Monday, May 30 2011.
-//  Copyright 2011 Cambrian College. All rights reserved.
-//
-
 #import "UINavigationBar+CustomImage.h"
 // Implement with this
 // [[navController navigationBar] performSelectorInBackground:@selector(setBackgroundImage:) withObject:image];
