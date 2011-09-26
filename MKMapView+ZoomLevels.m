@@ -1,11 +1,3 @@
-//
-//  ZoomLevels.m
-//  iCambrian
-//
-//  Created by Shaun Bentzen on Wednesday, September 21 2011.
-//  Copyright 2011 Cambrian College. All rights reserved.
-//
-
 #import "MKMapView+ZoomLevels.h"
 
 @implementation MKMapView (ZoomLevels)
