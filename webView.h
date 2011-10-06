@@ -20,15 +20,15 @@
     IBOutlet UIBarButtonItem *spaceTwo;
 }
 
-@property(nonatomic,retain) IBOutlet UIWebView *theWebView;
-@property(nonatomic,retain) MBProgressHUD *progress;
-@property(nonatomic,retain)	IBOutlet UIToolbar *toolbar;
-@property(nonatomic,retain)	IBOutlet UIBarButtonItem *back;
-@property(nonatomic,retain)	IBOutlet UIBarButtonItem *forward;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *spaceOne;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *spaceTwo;
-@property (retain) NSURL *websiteToUse;
-@property (retain) NSString *htmlToLoad;
+@property(nonatomic,strong) IBOutlet UIWebView *theWebView;
+@property(nonatomic,strong) MBProgressHUD *progress;
+@property(nonatomic,strong)	IBOutlet UIToolbar *toolbar;
+@property(nonatomic,strong)	IBOutlet UIBarButtonItem *back;
+@property(nonatomic,strong)	IBOutlet UIBarButtonItem *forward;
+@property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceOne;
+@property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceTwo;
+@property (strong) NSURL *websiteToUse;
+@property (strong) NSString *htmlToLoad;
 
 
 - (webView *) initWithWebsite:(NSURL *)theWebsite andTitle:(NSString *) titleToUse;

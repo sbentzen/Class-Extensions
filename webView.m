@@ -22,7 +22,6 @@
 
 - (void)hudWasHidden{
     [progress removeFromSuperview];
-    [progress release];
 }
 
 #pragma mark -
@@ -31,7 +30,7 @@
     //setting the view. this is called in the init methods and at the very end it calls viewdidload, because by the time you get to the end, it has loaded
     //NSLog(@"Loading the view");
     [[self theWebView] setDelegate:self];
-    [[self navigationItem]setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]autorelease]];
+    [[self navigationItem]setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]];
     [back setEnabled:NO];
     [forward setEnabled:NO];
     [self viewDidLoad];
@@ -56,7 +55,6 @@
     if (htmlToLoad != NULL) {
         //NSLog(@"loading the HTML document");
         [theWebView loadHTMLString:htmlToLoad baseURL:nil];
-        [htmlToLoad release];
     }
     else {
         //NSLog(@"starting a web request");
@@ -184,16 +182,7 @@
 }
 - (void)dealloc {
     //NSLog(@"DEALLOC CALLED");
-    back = nil;
-    forward = nil;
-    [spaceOne release];
-    [spaceTwo release];
-    [progress release];
     [theWebView loadHTMLString:@"" baseURL:nil];
-    [theWebView release];
-    [websiteToUse release];
-    theWebView = nil;
-    [super dealloc];
 }
 
 
