@@ -11,7 +11,7 @@
     for (int i = 0; i < sourceLen; ++i) {
         const unsigned char thisChar = source[i];
         if (thisChar == ' '){
-            [output appendString:@"+"];
+            [output appendString:@"%20"];
         } else if (thisChar == '.' || thisChar == '-' || thisChar == '_' || thisChar == '~' || 
                    (thisChar >= 'a' && thisChar <= 'z') ||
                    (thisChar >= 'A' && thisChar <= 'Z') ||
