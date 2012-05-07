@@ -27,8 +27,8 @@
 @property(nonatomic,strong)	IBOutlet UIBarButtonItem *forward;
 @property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceOne;
 @property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceTwo;
-@property (strong) NSURL *websiteToUse;
-@property (strong) NSString *htmlToLoad;
+@property(nonatomic,strong) NSURL *websiteToUse;
+@property(nonatomic,strong) NSString *htmlToLoad;
 
 
 - (webView *) initWithWebsite:(NSURL *)theWebsite andTitle:(NSString *) titleToUse;
