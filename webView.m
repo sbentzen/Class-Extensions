@@ -10,51 +10,83 @@
 
 
 @implementation webView
-@synthesize theWebView;
-@synthesize progress;
+@synthesize aWebView;
+@synthesize activityIndicator;
 @synthesize back;
 @synthesize forward;
 @synthesize toolbar;
 @synthesize websiteToUse;
 @synthesize htmlToLoad;
-@synthesize spaceOne;
-@synthesize spaceTwo;
 
 - (void)hudWasHidden{
-    [progress removeFromSuperview];
+    [activityIndicator removeFromSuperview];
 }
 
 #pragma mark -
 #pragma mark view lifecycle
 - (void)loadView {
-    //setting the view. this is called in the init methods and at the very end it calls viewdidload, because by the time you get to the end, it has loaded
+    
+    UIView *mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, (kScreenHeight - (20 + 50)))];
+    [self setView:mainView];
+    self.view.autoresizesSubviews = YES;
+    aWebView = [[UIWebView alloc] initWithFrame:mainView.bounds];
+    [aWebView setDataDetectorTypes:UIDataDetectorTypeAll];
+    [aWebView setScalesPageToFit:YES];
+    [aWebView setAutoresizesSubviews:YES];
+    [aWebView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth)];
+    [aWebView setContentMode:UIViewContentModeScaleToFill];
+    
+    [[self view] addSubview:aWebView];
+    
+    back = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.png"] landscapeImagePhone:[UIImage imageNamed:@"back.png"] style:UIBarButtonItemStylePlain target:aWebView action:@selector(goBack)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    [space setWidth:20];
+    forward = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"forward.png"] landscapeImagePhone:[UIImage imageNamed:@"forward.png"] style:UIBarButtonItemStylePlain target:aWebView action:@selector(goForward)];
+    UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:aWebView action:@selector(stopLoading)];
+    UIBarButtonItem *spaceOne = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    
+    NSLog(@"%f",kScreenCenterX);
+    [spaceOne setWidth:(kScreenCenterX - 90)];
+    
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:aWebView action:@selector(reload)];
+    UIBarButtonItem *spaceTwo = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    [spaceTwo setWidth:(kScreenCenterX - 90)];
+    toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 38, self.view.bounds.size.width, 44)];
+    [toolbar setAutoresizingMask:(UIViewAutoresizingFlexibleWidth)];
+    [[self view] addSubview:toolbar];
+    [toolbar setItems:[NSArray arrayWithObjects:back, space, forward, spaceOne, stopButton, spaceTwo, refreshButton, nil]];
+    [toolbar setBarStyle:UIBarStyleBlack];
+    
     //NSLog(@"Loading the view");
-    [[self theWebView] setDelegate:self];
+    [[self aWebView] setDelegate:self];
     [[self navigationItem]setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]];
     [back setEnabled:NO];
     [forward setEnabled:NO];
     [self viewDidLoad];
 
 }
-
-
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    
+    [toolbar setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height - toolbar.bounds.size.height/2)];
+//    NSLog(@"%f %f",toolbar.center.x, toolbar.center.y);
+}
 - (void) viewWillDisappear:(BOOL)animated{
     //when the view is disappearing set the hide button to nil, remove the delegate and stop the loading
     //NSLog(@"Removing some things, stopping the loading and setting the delegate to nil");
     [[self navigationItem] setRightBarButtonItem:nil];
-    [[self theWebView] setDelegate:nil];
-    [theWebView stopLoading];
+    [[self aWebView] setDelegate:nil];
+    [aWebView stopLoading];
 }
 - (void) viewDidLoad{
     [self setHidesBottomBarWhenPushed:YES];
     [[self toolbar] setTintColor:defaultColor];
-    progress = [[MBProgressHUD alloc] initWithView:[self view]];
-    [progress setMode:MBProgressHUDModeIndeterminate];
-    [progress setTag:1];
-    [theWebView setDataDetectorTypes:UIDataDetectorTypeAll];
+    activityIndicator = [[MBProgressHUD alloc] initWithView:[self view]];
+    [activityIndicator setMode:MBProgressHUDModeIndeterminate];
+    [activityIndicator setTag:1];
+    [aWebView setDataDetectorTypes:UIDataDetectorTypeAll];
     if (htmlToLoad != NULL) {
         //NSLog(@"loading the HTML document");
-        [theWebView loadHTMLString:htmlToLoad baseURL:nil];
+        [aWebView loadHTMLString:htmlToLoad baseURL:nil];
     }
     else {
         //NSLog(@"starting a web request");
@@ -62,7 +94,7 @@
         webWorker = dispatch_queue_create("com.icambrian.webWorker", NULL);
         dispatch_async(webWorker, ^{
             //NSLog(@"Working Asynchronously");
-            [theWebView loadRequest:[NSURLRequest requestWithURL:websiteToUse cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10]];
+            [aWebView loadRequest:[NSURLRequest requestWithURL:websiteToUse cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10]];
         });
         //the queue is being released because the it has been loaded.
         dispatch_release(webWorker);
@@ -96,13 +128,11 @@
     //this is an initialization method that loads the nib (depending on if it's an iPad or not)
     self = [super init];
     //NSLog(@"an initializer for a custom webView that takes a URL and a title for the page.");
-    [[NSBundle mainBundle] loadNibNamed:@"webView" owner:self options:nil];
-    
     if (self) {
         [self setTitle:titleToUse];
         websiteToUse = [theWebsite copy];
     }
-    [[self theWebView] setScalesPageToFit:YES];
+    [[self aWebView] setScalesPageToFit:YES];
     [self loadView];
     return self;
 }
@@ -110,10 +140,8 @@
 - (webView*) initWithHTMLString:(NSString *)htmlFile{
     //initializes with HTML data
     self = [super init];
-    
-    [[NSBundle mainBundle] loadNibNamed:@"webView" owner:self options:nil];
     //NSLog(@"custom initializer for an HTML file.");
-    [theWebView setScalesPageToFit:NO];
+    [aWebView setScalesPageToFit:NO];
     htmlToLoad = [htmlFile copy];
     [self loadView];
     return self;
@@ -122,9 +150,9 @@
 #pragma mark -
 #pragma mark webView methods
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [progress setCenter:[self view].center];
-    [[self view] addSubview:progress];
-    [progress show:YES];
+    [activityIndicator setCenter:[self view].center];
+    [[self view] addSubview:activityIndicator];
+    [activityIndicator show:YES];
     //NSLog(@"showing the spinning thing");
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -136,14 +164,14 @@
     //NSLog(@"Finished Loading");
     [webView canGoBack]?[back setEnabled:YES]:[back setEnabled:NO];
     [webView canGoForward]?[forward setEnabled:YES]:[forward setEnabled:NO];
-    [progress hide:YES];
-    [progress removeFromSuperview];
+    [activityIndicator hide:YES];
+    [activityIndicator removeFromSuperview];
     //NSLog(@"hiding the spinning thing");
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     if (error.code != NSURLErrorCancelled){
-        [theWebView stopLoading];
-        [progress hide:YES];
+        [aWebView stopLoading];
+        [activityIndicator hide:YES];
         NSLog(@"%@",[error localizedDescription]);
     }
 }
@@ -182,7 +210,7 @@
 }
 - (void)dealloc {
     //NSLog(@"DEALLOC CALLED");
-    [theWebView loadHTMLString:@"" baseURL:nil];
+    [aWebView loadHTMLString:@"" baseURL:nil];
 }
 
 

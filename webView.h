@@ -8,25 +8,20 @@
 #import "MBProgressHUD.h"
 
 @interface webView : UIViewController <UIWebViewDelegate,MBProgressHUDDelegate> {
-	IBOutlet UIWebView *theWebView;
-    NSTimer *Timer;
+	IBOutlet UIWebView *aWebView;
 	NSURL *websiteToUse;
 	NSString *htmlToLoad;
-	MBProgressHUD *progress;
+	MBProgressHUD *activityIndicator;
 	IBOutlet UIToolbar *toolbar;
 	IBOutlet UIBarButtonItem *back;
 	IBOutlet UIBarButtonItem *forward;
-    IBOutlet UIBarButtonItem *spaceOne;
-    IBOutlet UIBarButtonItem *spaceTwo;
 }
 
-@property(nonatomic,strong) IBOutlet UIWebView *theWebView;
-@property(nonatomic,strong) MBProgressHUD *progress;
+@property(nonatomic,strong) IBOutlet UIWebView *aWebView;
+@property(nonatomic,strong) MBProgressHUD *activityIndicator;
 @property(nonatomic,strong)	IBOutlet UIToolbar *toolbar;
 @property(nonatomic,strong)	IBOutlet UIBarButtonItem *back;
 @property(nonatomic,strong)	IBOutlet UIBarButtonItem *forward;
-@property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceOne;
-@property(nonatomic,strong) IBOutlet UIBarButtonItem *spaceTwo;
 @property(nonatomic,strong) NSURL *websiteToUse;
 @property(nonatomic,strong) NSString *htmlToLoad;
 
