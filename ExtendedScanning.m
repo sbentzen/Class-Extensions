@@ -9,7 +9,7 @@
 #import "ExtendedScanning.h"
 
 
-@implementation NSScanner (ExtendedScanning)
+@implementation NSScanner (URL-File-Scanner)
 
 +(BOOL)scanForFiletype:(NSString *)filetype inString:(NSString *)data{
     

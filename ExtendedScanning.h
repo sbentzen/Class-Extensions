@@ -1,15 +1,16 @@
-//
-//  ExtendedScanning.h
-//  Sambaworks
-//
-//  Created by Shaun on Wednesday, March 9 2011.
-//  Copyright 2011 Sambaworks. All rights reserved.
-//
+/*!
+@category URL-File-Scanner
+@abstract An extension upon NSScanner to scan an URL or whatever for a certain extension, or an image extension.
+@discussion Could definitely use some refactoring.
+@author Shaun Bentzen
+@updated 2011-03-09
+*/
+
 
 #import <Foundation/Foundation.h>
 
 
-@interface NSScanner (ExtendedScanning)
+@interface NSScanner (URL-File-Scanner)
 +(BOOL)scanForFiletype:(NSString *)filetype inString:(NSString *)data;
 
 +(NSString *)scanForURLWithImageExtension:(NSString *)fileExtension inString:(NSString *)data;
