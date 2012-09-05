@@ -45,7 +45,6 @@
     UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self.aWebView action:@selector(stopLoading)];
     UIBarButtonItem *spaceOne = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
-    NSLog(@"%f",kScreenCenterX);
     [spaceOne setWidth:(kScreenCenterX - 90)];
     
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self.aWebView action:@selector(reload)];
