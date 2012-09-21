@@ -90,7 +90,7 @@
     else {
         //NSLog(@"starting a web request");
         dispatch_queue_t webWorker;
-        webWorker = dispatch_queue_create("com.icambrian.webWorker", NULL);
+        webWorker = dispatch_queue_create("com.sambaworks.webWorker", NULL);
         dispatch_async(webWorker, ^{
             //NSLog(@"Working Asynchronously");
             [self.aWebView loadRequest:[NSURLRequest requestWithURL:websiteToUse cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10]];
