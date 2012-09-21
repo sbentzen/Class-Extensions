@@ -29,7 +29,7 @@
     UIView *mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, (kScreenHeight - (20 + 50)))];
     [self setView:mainView];
     self.view.autoresizesSubviews = YES;
-    self.aWebView = [[UIWebView alloc] initWithFrame:mainView.bounds];
+    self.aWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, (kScreenHeight - (20 + 50 + 44)))];
     [self.aWebView setDataDetectorTypes:UIDataDetectorTypeAll];
     [self.aWebView setScalesPageToFit:YES];
     [self.aWebView setAutoresizesSubviews:YES];
@@ -58,7 +58,7 @@
     
     //NSLog(@"Loading the view");
     [[self aWebView] setDelegate:self];
-    [[self navigationItem]setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]];
+//    [[self navigationItem]setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Hide"style:UIBarButtonItemStyleBordered target:self action:@selector(toggleToolbar)]];
     [self.back setEnabled:NO];
     [self.forward setEnabled:NO];
     [self viewDidLoad];
